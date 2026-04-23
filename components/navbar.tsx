@@ -22,7 +22,7 @@ export default function Navbar() {
         <header className="fixed w-full bg-[#fafafc] border-b border-gray-200 z-50">
             <div className="w-full relative flex items-center justify-between px-6 py-4">
 
-                {/* Liens de navigation — gauche */}
+                {/* Liens — gauche */}
                 <nav className="flex items-center gap-6 text-[18px]">
                     <Link
                         href="/historique"
@@ -35,18 +35,14 @@ export default function Navbar() {
                         Fonctionnalités
                     </Link>
                     <Link
-                        href="/contact"
-                        className={`pb-1 border-b-2 ${
-                            activePage === "contact"
-                                ? activeBorderColor
-                                : "border-transparent"
-                        } ${linkColor} ${linkHoverColor} transition-colors`}
+                        href="/tarifs"
+                        className={`pb-1 border-b-2 border-transparent ${linkColor} ${linkHoverColor} transition-colors`}
                     >
                         Tarifs
                     </Link>
                 </nav>
 
-                {/* Logo — centré absolument */}
+                {/* Logo — centré */}
                 <div className="absolute left-1/2 -translate-x-1/2">
                     <Link href="/" className="hover:opacity-80 transition-opacity">
                         <Image
