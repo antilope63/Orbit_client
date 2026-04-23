@@ -25,18 +25,14 @@ export default function Navbar() {
                 {/* Liens — gauche */}
                 <nav className="flex items-center gap-6 text-[18px]">
                     <Link
-                        href="/historique"
-                        className={`pb-1 border-b-2 ${
-                            activePage === "historique"
-                                ? activeBorderColor
-                                : "border-transparent"
-                        } ${linkColor} ${linkHoverColor} transition-colors`}
+                        href="/fonctionalities"
+                        className="text-[16px] font-medium text-[#6A6A73] transition-colors hover:text-black"
                     >
                         Fonctionnalités
                     </Link>
                     <Link
                         href="/tarifs"
-                        className={`pb-1 border-b-2 border-transparent ${linkColor} ${linkHoverColor} transition-colors`}
+                        className="text-[16px] font-medium text-[#6A6A73] transition-colors hover:text-black"
                     >
                         Tarifs
                     </Link>
@@ -56,16 +52,16 @@ export default function Navbar() {
                 </div>
 
                 {/* Actions — droite */}
-                <div className="flex items-center gap-6 text-[18px]">
+                <div className="flex items-center gap-6">
+                    <Link
+                        href="/contact"
+                        className="text-[16px] font-medium text-[#6A6A73] transition-colors hover:text-black"
+                    >
+                        Contact
+                    </Link>
                     <Link
                         href="/connexion"
                         className="text-[16px] font-medium text-[#6A6A73] transition-colors hover:text-black"
-                    >
-                        Connexion
-                    </Link>
-                    <Link
-                        href="/login"
-                        className={`pb-1 border-b-2 border-transparent ${linkColor} ${linkHoverColor} transition-colors`}
                     >
                         Se connecter
                     </Link>
