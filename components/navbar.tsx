@@ -43,8 +43,8 @@ export default function Navbar() {
                 </nav>
 
                 {/* Logo — centré */}
-                <div className="absolute left-1/2 -translate-x-1/2">
-                    <Link href="/" className="hover:opacity-80 transition-opacity">
+                <div className="flex justify-center">
+                    <Link href="/" className="hover:text-black transition-colors">
                         <Image
                             src="/logo_rouge.svg"
                             alt="Orbit Logo"
@@ -58,10 +58,10 @@ export default function Navbar() {
                 {/* Actions — droite */}
                 <div className="flex items-center gap-6 text-[18px]">
                     <Link
-                        href="/contact"
-                        className={`pb-1 border-b-2 border-transparent ${linkColor} ${linkHoverColor} transition-colors`}
+                        href="/connexion"
+                        className="text-[16px] font-medium text-[#6A6A73] transition-colors hover:text-black"
                     >
-                        Contact
+                        Connexion
                     </Link>
                     <Link
                         href="/login"
