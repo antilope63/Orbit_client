@@ -47,8 +47,8 @@ export default function FonctionnalitesPage() {
 
             {/* Section titre + tabs */}
             <section className="py-16 px-6 text-center">
-                <h1 className="text-[40px] font-bold mb-2">Services proposées</h1>
-                <p className="text-[#6A6A73] font-medium text-[18px]">
+                <h2 className="text-[40px] font-bold mb-2">Services proposées</h2>
+                <p className="text-[#6A6A73] font-medium text-[18px] max-w-[500px] mx-auto">
                     Découvrez comment <span className="text-[#984B4B]">Orbit</span> peut révolutionner
                     l'expérience de votre magasin grâce à nos atouts.
                 </p>
