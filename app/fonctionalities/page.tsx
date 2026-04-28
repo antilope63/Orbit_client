@@ -1,11 +1,12 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 export default function FonctionnalitesPage() {
     return (
-        <div className="min-h-screen w-full bg-[#F2F2F6] text-black ">
+        <div className="min-h-screen w-full bg-[#F2F2F6] text-black">
 
             {/* Hero */}
             <div className="relative w-full">
@@ -81,7 +82,7 @@ export default function FonctionnalitesPage() {
                             img: "/card3.jpg",
                         },
                     ].map((card, i) => (
-                        <div key={i} className="bg-white rounded-2xl shadow-sm overflow-hidden flex flex-col">
+                        <Card key={i} className="overflow-hidden rounded-2xl shadow-sm border-0">
                             <div className="w-full h-[180px] relative">
                                 <Image
                                     src={card.img}
@@ -90,11 +91,11 @@ export default function FonctionnalitesPage() {
                                     className="object-cover"
                                 />
                             </div>
-                            <div className="p-5 flex flex-col gap-2">
+                            <CardContent className="p-5 flex flex-col gap-2">
                                 <h3 className="font-bold text-black text-[18px]">{card.title}</h3>
                                 <p className="text-[#6A6A73] text-[16px] leading-relaxed">{card.description}</p>
-                            </div>
-                        </div>
+                            </CardContent>
+                        </Card>
                     ))}
                 </div>
             </section>
