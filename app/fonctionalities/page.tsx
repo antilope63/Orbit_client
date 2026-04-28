@@ -19,9 +19,9 @@ export default function FonctionnalitesPage() {
                     )}
                 />
                 <div className="absolute inset-0 z-10 bg-gradient-to-b from-[#F2F2F6]/0 via-[#F2F2F6]/70 to-[#F2F2F6]" />
-                <div className="relative z-10 flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto px-12 py-20 gap-16 h-full">
-                    <div className="flex flex-col gap-4 w-[420px]">
-                        <h1 className="text-[72px] font-semibold leading-tight">
+                <div className="relative z-10 flex flex-col md:flex-row items-center justify-between max-w-[1420px] mx-auto px-12 py-20 gap-16 h-full">
+                    <div className="flex flex-col gap-4 w-[438px]">
+                        <h1 className="text-[40px] font-bold leading-tight">
                             Fonctionnalités
                         </h1>
                         <p className="text-[#6A6A73] font-medium text-[18px]">
@@ -34,7 +34,7 @@ export default function FonctionnalitesPage() {
                             </Link>
                         </Button>
                     </div>
-                    <div className="w-[500px] h-[320px] relative rounded-2xl overflow-hidden flex-shrink-0 shadow-sm">
+                    <div className="w-[600px] h-[400px] relative rounded-lg overflow-hidden flex-shrink-0 shadow-sm">
                         <Image
                             src="/image/accueil.png"
                             alt="Hero fonctionnalités"
@@ -47,10 +47,10 @@ export default function FonctionnalitesPage() {
 
             {/* Section titre + tabs */}
             <section className="py-16 px-6 text-center">
-                <h2 className="text-[32px] font-bold mb-2">Fonctionnalités</h2>
-                <p className="text-[#6A6A73] font-medium text-[20px] max-w-md mx-auto">
+                <h1 className="text-[40px] font-bold mb-2">Capacités proposées</h1>
+                <p className="text-[#6A6A73] font-medium text-[18px]">
                     Découvrez comment <span className="text-[#984B4B]">Orbit</span> peut révolutionner
-                    l'expérience de votre magasin grâce à nos fonctionnalités.
+                    l'expérience de votre magasin grâce à nos atouts.
                 </p>
                 <div className="flex items-center justify-center gap-2 mt-8">
                     <Button className="bg-[#8C1111] hover:bg-[#5e0a0a] text-white font-semibold rounded-md px-6 py-2">
