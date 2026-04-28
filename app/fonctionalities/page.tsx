@@ -19,8 +19,8 @@ export default function FonctionnalitesPage() {
                     )}
                 />
                 <div className="absolute inset-0 z-10 bg-gradient-to-b from-[#F2F2F6]/0 via-[#F2F2F6]/70 to-[#F2F2F6]" />
-                <div className="relative z-10 flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto px-12 py-12 gap-8 h-full">
-                    <div className="flex flex-col gap-4 max-w-sm">
+                <div className="relative z-10 flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto px-12 py-20 gap-16 h-full">
+                    <div className="flex flex-col gap-4 w-[420px]">
                         <h1 className="text-[72px] font-semibold leading-tight">
                             Fonctionnalités
                         </h1>
@@ -28,15 +28,15 @@ export default function FonctionnalitesPage() {
                             <span className="text-[#984B4B] font-semibold">Orbit </span>
                             réinvente l'expérience en magasin. Scannez, payez et partez. C'est aussi simple que ça.
                         </p>
-                        <Link href="/inscription">
-                            <Button className="w-fit bg-[#8C1111] hover:bg-[#5e0a0a] text-white font-semibold rounded-md px-6 py-2">
+                        <Button asChild className="w-fit bg-[#8C1111] hover:bg-[#5e0a0a] text-white font-semibold rounded-md px-6 py-2">
+                            <Link href="/inscription">
                                 Découvrir Orbit
-                            </Button>
-                        </Link>
+                            </Link>
+                        </Button>
                     </div>
-                    <div className="w-[340px] h-[220px] relative rounded-2xl overflow-hidden flex-shrink-0 shadow-sm">
+                    <div className="w-[500px] h-[320px] relative rounded-2xl overflow-hidden flex-shrink-0 shadow-sm">
                         <Image
-                            src="/hero-car.jpg"
+                            src="/image/accueil.png"
                             alt="Hero fonctionnalités"
                             fill
                             className="object-cover"
@@ -69,17 +69,17 @@ export default function FonctionnalitesPage() {
                         {
                             title: "Scan NFC instantané",
                             description: "Chaque article est associé à un tag NFC unique. Le client scanne l'article, le produit est instantanément reconnu et ajouté à son panier.",
-                            img: "/card1.jpg",
+                            img: "/image/scan_home.png",
                         },
                         {
                             title: "Paiement automatique et sécurisé",
                             description: "Une fois le panier validé, le paiement s'effectue simplement. Le client paie via son moyen de paiement enregistré et reçoit une facture.",
-                            img: "/card2.jpg",
+                            img: "/image/achat_home.png",
                         },
                         {
                             title: "Antivols automatiques",
                             description: "Dès la validation du paiement, les antivols se désactivent automatiquement. Le client peut sortir sans intervention du personnel.",
-                            img: "/card3.jpg",
+                            img: "/image/partir_home.png",
                         },
                     ].map((card, i) => (
                         <Card key={i} className="overflow-hidden rounded-2xl shadow-sm border-0">
