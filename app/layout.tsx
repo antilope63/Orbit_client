@@ -16,7 +16,7 @@ export default function RootLayout({
         <html lang="fr">
             <body className="bg-[#fafafc]">
                 <Navbar />
-                <main className="pt-[65px]">
+                <main className="pt-[55px]">
                     {children}
                 </main>
             </body>
