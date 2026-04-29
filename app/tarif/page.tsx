@@ -1,144 +1,212 @@
-import Image from "next/image";
-import { Plus_Jakarta_Sans } from "next/font/google";
+'use client';
 
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-});
-
-// Brand color extrait du logo Orbit
-const ORBIT_RED = "#7E1A23";
+import { useState } from 'react';
 
 const features = [
   {
-    title: "Plus de ventes",
-    subtitle: "Fini les abandons en caisse",
-    description:
-      "Vos clients achètent, vous ne perdez plus de ventes à cause de l'attente",
+    tag: 'Plus de ventes',
+    title: 'Fini les abandons en caisse',
+    desc: "Vos clients achètent, vous ne perdez plus de ventes à cause de l'attente.",
   },
   {
-    title: "Moins de pertes",
-    subtitle: "Antivol nouvelle génération",
-    description:
-      "La double techno NFC + RFID UHF détecte tout article non payé en sortie.",
+    tag: 'Moins de pertes',
+    title: 'Antivol nouvelle génération',
+    desc: 'La double techno NFC + RFID UHF détecte tout article non payé en sortie.',
   },
   {
-    title: "Vos équipes libérées",
-    subtitle: "Conseil plutôt que caisse",
-    description:
-      "Redéployez votre personnel sur le conseil et l'expérience en magasin.",
+    tag: 'Vos équipes libérées',
+    title: 'Conseil plutôt que caisse',
+    desc: "Redéployez votre personnel sur le conseil et l'expérience en magasin.",
   },
 ];
 
-export default function PricingPage() {
+const faqs = [
+  {
+    question: "Comment se passe l'installation ?",
+    answer:
+      "Notre équipe se déplace dans votre point de vente pour installer l'ensemble du matériel et former vos collaborateurs. L'installation complète prend généralement entre une et deux journées selon la taille du magasin, sans interrompre votre activité.",
+  },
+  {
+    question: 'Quels sont les délais de mise en service ?',
+    answer:
+      "Une fois le contrat signé, comptez environ 2 à 3 semaines pour la livraison du matériel et la planification de l'installation. Vous êtes opérationnel dès le jour de l'installation.",
+  },
+  {
+    question: "Le matériel est-il inclus dans l'abonnement ?",
+    answer:
+      "Oui. L'ensemble du matériel (antennes RFID UHF, lecteurs NFC, terminaux de paiement, étiquettes) est inclus dans votre abonnement mensuel. Aucun frais caché, tout est compris.",
+  },
+  {
+    question: "Y a-t-il un engagement de durée ?",
+    answer:
+      "Notre offre standard inclut un engagement de 24 mois pour amortir le matériel installé en magasin. Des conditions sur-mesure peuvent être étudiées pour les enseignes multi-points de vente.",
+  },
+];
+
+export default function TarifsPage() {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
   return (
-    <section
-      className={`${jakarta.className} min-h-screen bg-white py-16 sm:py-24 px-4 sm:px-6 lg:px-8`}
-    >
-      <div className="max-w-6xl mx-auto">
-        {/* Heading */}
-        <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.05] text-black">
-            Un tarif simple pour
-            <br />
-            une experience sans friction
-          </h2>
-          <p className="mt-5 text-base sm:text-lg text-neutral-500">
-            Un seul plan, pas de concession sur la qualité.
-          </p>
-        </div>
-
-        {/* Pricing card */}
-        <div className="relative bg-[#ECECEE] rounded-[28px] p-6 sm:p-10 lg:p-12 overflow-hidden">
-          {/* Top row : titre + prix */}
-          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 lg:gap-12 relative z-10">
-            <div className="max-w-2xl">
-              <p
-                className="font-semibold text-sm sm:text-base"
-                style={{ color: ORBIT_RED }}
-              >
-                Solution dédiée aux enseignes de prêt-à-porter
-              </p>
-              <h3 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-bold text-black">
-                Solution Orbit
-              </h3>
-              <p className="mt-2 text-neutral-600 text-sm sm:text-base">
-                Tout l&apos;équipement &amp; l&apos;accompagnement pour votre point de vente
-              </p>
-            </div>
-
-            <div className="lg:text-right shrink-0">
-              <p className="text-neutral-600 text-sm sm:text-base">À partir de</p>
-              <p className="mt-1 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-black tracking-tight">
-                1 000€
-                <span className="text-sm sm:text-base font-normal text-neutral-600 ml-0.5">
-                  /mois/magasins
-                </span>
-              </p>
-            </div>
+    <main className="min-h-screen bg-white text-black">
+      {/* ========== PRICING ========== */}
+      <section className="px-4 sm:px-6 lg:px-8 pt-20 lg:pt-28 pb-12">
+        <div className="max-w-[1492px] mx-auto">
+          {/* Heading */}
+          <div className="text-center mb-16">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05]">
+              Un tarif simple pour
+              <br />
+              une experience sans friction
+            </h1>
+            <p className="mt-6 text-base md:text-lg text-neutral-500">
+              Un seul plan, pas de concession sur la qualité.
+            </p>
           </div>
 
-          {/* Divider */}
-          <div className="my-8 sm:my-10 border-t border-neutral-300/70 relative z-10" />
-
-          {/* Feature cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 relative z-10">
-            {features.map((f) => (
-              <div
-                key={f.title}
-                className="bg-white rounded-2xl p-6 shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition-shadow duration-200 hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)]"
-              >
-                <div
-                  className="flex items-center gap-2 font-semibold mb-3"
-                  style={{ color: ORBIT_RED }}
-                >
-                  {/* Icône Orbit (étoile blanche sur rond bordeaux) */}
-                  <Image
-                    src="/icon-logo-blanc.png"
-                    alt=""
-                    width={20}
-                    height={20}
-                    className=""
-                  />
-                  <span>{f.title}</span>
-                </div>
-                <h4 className="font-bold text-black mb-2 text-base">
-                  {f.subtitle}
-                </h4>
-                <p className="text-neutral-600 text-sm leading-relaxed">
-                  {f.description}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          {/* CTA */}
-          <div className="flex justify-center mt-10 relative z-10">
-            <button
-              type="button"
-              className="text-white px-7 py-3 rounded-lg font-semibold text-sm sm:text-base transition-all duration-200 shadow-sm hover:opacity-90 active:scale-[0.98]"
-              style={{ backgroundColor: ORBIT_RED }}
-            >
-              Équiper mon magasin
-            </button>
-          </div>
-
-          {/* Watermark — wordmark Orbit en filigrane */}
-          <div
-            aria-hidden="true"
-            className="absolute -bottom-6 -right-2 sm:bottom-2 sm:right-6 w-[180px] sm:w-[240px] lg:w-[300px] opacity-[0.07] select-none pointer-events-none"
-          >
-            <Image
+          {/* Card */}
+          <div className="relative bg-[#F2F2F6] rounded-3xl p-6 sm:p-10 lg:p-14 overflow-hidden lg:min-h-[540px] flex flex-col">
+            {/* Watermark logo */}
+            <img
               src="/logo_rouge.svg"
               alt=""
-              width={460}
-              height={170}
-              className="w-full h-auto"
-              priority={false}
+              aria-hidden="true"
+              className="pointer-events-none select-none absolute -bottom-2 -right-4 sm:-bottom-4 sm:-right-6 w-[200px] sm:w-[320px] lg:w-[420px] opacity-[0.06]"
             />
+
+            {/* Top: titre + prix */}
+            <div className="relative flex flex-col md:flex-row md:items-start md:justify-between gap-6 pb-8 lg:pb-10 border-b border-black/10">
+              <div>
+                <p className="text-sm font-semibold text-[#8B1A1A] mb-2">
+                  Solution dédiée aux enseignes de prêt-à-porter
+                </p>
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-black mb-3">
+                  Solution Orbit
+                </h2>
+                <p className="text-neutral-700 max-w-md">
+                  Tout l&apos;équipement &amp; l&apos;accompagnement pour votre point de vente
+                </p>
+              </div>
+
+              <div className="flex flex-col md:items-end shrink-0">
+                <p className="text-sm md:text-base text-neutral-600 mb-2">À partir de</p>
+                <p className="text-3xl md:text-4xl lg:text-5xl font-black leading-none">
+                  1 000€
+                  <span className="text-sm md:text-base font-medium text-neutral-600">
+                    /mois/magasin
+                  </span>
+                </p>
+              </div>
+            </div>
+
+            {/* Features cards */}
+            <div className="relative grid md:grid-cols-3 gap-4 md:gap-5 mt-8 lg:mt-10">
+              {features.map((item) => (
+                <div
+                  key={item.tag}
+                  className="bg-white rounded-2xl p-6 transition-transform duration-300 hover:-translate-y-1"
+                >
+                  <div className="flex items-center gap-2 text-[#8B1A1A] mb-3">
+                    <Sparkle />
+                    <span className="font-medium">{item.tag}</span>
+                  </div>
+                  <h3 className="font-bold mb-2">{item.title}</h3>
+                  <p className="text-sm text-neutral-600 leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* CTA */}
+            <div className="relative flex justify-center mt-10">
+              <button
+                type="button"
+                className="bg-[#8B1A1A] hover:bg-[#6f1414] active:scale-[0.98] transition-all text-white font-medium px-8 py-3.5 rounded-[10px] shadow-sm"
+              >
+                Équiper mon magasin
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* ========== FAQ ========== */}
+      <section className="px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-center mb-12 lg:mb-16 leading-tight">
+            Questions Fréquemment Posées
+          </h2>
+
+          <div className="space-y-4">
+            {faqs.map((faq, i) => {
+              const isOpen = openIndex === i;
+              return (
+                <div
+                  key={i}
+                  className="bg-[#F2F2F6] rounded-2xl overflow-hidden"
+                >
+                  <button
+                    type="button"
+                    onClick={() => setOpenIndex(isOpen ? null : i)}
+                    aria-expanded={isOpen}
+                    className="w-full flex items-center justify-between gap-4 px-6 md:px-8 py-5 text-left"
+                  >
+                    <span className="font-bold text-base md:text-lg">
+                      {faq.question}
+                    </span>
+                    <svg
+                      className={`w-5 h-5 flex-shrink-0 transition-transform duration-300 ${
+                        isOpen ? 'rotate-180' : ''
+                      }`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2.5}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </button>
+
+                  {/* Animated reveal */}
+                  <div
+                    className={`grid transition-all duration-300 ease-in-out ${
+                      isOpen
+                        ? 'grid-rows-[1fr] opacity-100'
+                        : 'grid-rows-[0fr] opacity-0'
+                    }`}
+                  >
+                    <div className="overflow-hidden">
+                      <p className="px-6 md:px-8 pb-6 text-neutral-700 leading-relaxed">
+                        {faq.answer}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+/* ---------- petit composant icône ---------- */
+function Sparkle() {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M12 0l2.5 9.5L24 12l-9.5 2.5L12 24l-2.5-9.5L0 12l9.5-2.5L12 0z" />
+    </svg>
   );
 }
