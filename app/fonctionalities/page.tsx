@@ -1,10 +1,52 @@
+"use client";
+
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { useState } from "react";
+
+const principalesCards = [
+    {
+        title: "Scan NFC instantané",
+        description: "Chaque article est associé à un tag NFC unique. Le client scanne l'article, le produit est instantanément reconnu et ajouté à son panier.",
+        img: "/image/scan_home.png",
+    },
+    {
+        title: "Paiement automatique et sécurisé",
+        description: "Une fois le panier validé, le paiement s'effectue simplement. Le client paie via son moyen de paiement enregistré et reçoit une facture.",
+        img: "/image/achat_home.png",
+    },
+    {
+        title: "Antivols automatiques",
+        description: "Dès la validation du paiement, les antivols se désactivent automatiquement. Le client peut sortir sans intervention du personnel.",
+        img: "/image/partir_home.png",
+    },
+];
+
+const avanceesCards = [
+    {
+        title: "Historique des achats",
+        description: "Consultez l'ensemble de vos achats passés directement depuis l'application, avec le détail de chaque article.",
+        img: "/image/scan_home.png",
+    },
+    {
+        title: "Notifications en temps réel",
+        description: "Recevez des alertes personnalisées sur vos achats, promotions et nouveautés disponibles en magasin.",
+        img: "/image/achat_home.png",
+    },
+    {
+        title: "Mode hors-ligne",
+        description: "Continuez à scanner vos articles même sans connexion internet. La synchronisation se fait automatiquement.",
+        img: "/image/partir_home.png",
+    },
+];
 
 export default function FonctionnalitesPage() {
+    const [activeTab, setActiveTab] = useState<"principales" | "avancees">("principales");
+    const cards = activeTab === "principales" ? principalesCards : avanceesCards;
+
     return (
         <div className="min-h-screen w-full bg-[#F2F2F6] text-black">
 
@@ -28,7 +70,7 @@ export default function FonctionnalitesPage() {
                             <span className="text-[#984B4B] font-semibold">Orbit </span>
                             réinvente l'expérience en magasin. Scannez, payez et partez. C'est aussi simple que ça.
                         </p>
-                        <Button asChild className="w-fit bg-[#8C1111] hover:bg-[#5e0a0a] text-white font-semibold rounded-md px-6 py-2">
+                        <Button asChild className="w-fit text-[14px] bg-[#8C1111] hover:bg-[#5e0a0a] text-white font-semibold rounded-md px-6 py-2">
                             <Link href="/inscription">
                                 Découvrir Orbit
                             </Link>
@@ -52,36 +94,40 @@ export default function FonctionnalitesPage() {
                     Découvrez comment <span className="text-[#984B4B]">Orbit</span> peut révolutionner
                     l'expérience de votre magasin grâce à nos atouts.
                 </p>
-                <div className="flex items-center justify-center gap-2 mt-8">
-                    <Button className="bg-[#8C1111] hover:bg-[#5e0a0a] text-white font-semibold rounded-md px-6 py-2">
-                        principales
-                    </Button>
-                    <Button variant="outline" className="border border-gray-300 text-[#6A6A73] font-semibold rounded-md px-6 py-2 hover:border-[#8C1111] hover:text-[#8C1111] bg-transparent">
-                        avancées
-                    </Button>
+
+                {/* Tabs */}
+                <div className="flex items-center justify-center mt-8">
+                    <div className="flex items-center bg-white rounded-xl p-1 gap-1 shadow-sm">
+                        <button
+                            onClick={() => setActiveTab("principales")}
+                            className={cn(
+                                "px-8 py-3 rounded-lg font-semibold text-[16px] transition-all",
+                                activeTab === "principales"
+                                    ? "bg-[#8C1111] text-white"
+                                    : "text-[#8C1111] hover:bg-gray-100"
+                            )}
+                        >
+                            principales
+                        </button>
+                        <button
+                            onClick={() => setActiveTab("avancees")}
+                            className={cn(
+                                "px-8 py-3 rounded-lg font-semibold text-[16px] transition-all",
+                                activeTab === "avancees"
+                                    ? "bg-[#8C1111] text-white"
+                                    : "text-[#8C1111] hover:bg-gray-100"
+                            )}
+                        >
+                            avancées
+                        </button>
+                    </div>
                 </div>
             </section>
 
             {/* Cards fonctionnalités */}
             <section className="py-6 px-6">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    {[
-                        {
-                            title: "Scan NFC instantané",
-                            description: "Chaque article est associé à un tag NFC unique. Le client scanne l'article, le produit est instantanément reconnu et ajouté à son panier.",
-                            img: "/image/scan_home.png",
-                        },
-                        {
-                            title: "Paiement automatique et sécurisé",
-                            description: "Une fois le panier validé, le paiement s'effectue simplement. Le client paie via son moyen de paiement enregistré et reçoit une facture.",
-                            img: "/image/achat_home.png",
-                        },
-                        {
-                            title: "Antivols automatiques",
-                            description: "Dès la validation du paiement, les antivols se désactivent automatiquement. Le client peut sortir sans intervention du personnel.",
-                            img: "/image/partir_home.png",
-                        },
-                    ].map((card, i) => (
+                    {cards.map((card, i) => (
                         <Card key={i} className="overflow-hidden rounded-2xl shadow-sm border-0">
                             <div className="w-full h-[180px] relative">
                                 <Image
@@ -104,18 +150,18 @@ export default function FonctionnalitesPage() {
             <section className="py-16 px-6">
                 <div className="max-w-6xl mx-auto">
                     <div className="w-full bg-[#D16F6F] rounded-2xl shadow-sm py-14 px-6 flex flex-col items-center text-center gap-4">
-                        <h2 className="text-[32px] font-bold text-white">
+                        <h2 className="text-[30px] font-bold text-white">
                             Prêt à réinventer l'expérience en magasin ?
                         </h2>
-                        <p className="text-[#F2F2F6] font-medium text-[16px]">
+                        <p className="text-[#F2F2F6] font-medium text-[18px]">
                             Avec Orbit, transformez votre boutique
                             en supprimant l'attente à la caisse.
                         </p>
-                        <Link href="/inscription">
-                            <Button className="bg-[#8C1111] hover:bg-[#5e0a0a] text-white font-semibold text-[18px] rounded-md px-8 py-5 mt-2">
+                        <Button asChild className="bg-[#8C1111] hover:bg-[#5e0a0a] text-white font-semibold text-[14px] rounded-md px-8 py-5 mt-2">
+                            <Link href="/inscription">
                                 Découvrir Orbit
-                            </Button>
-                        </Link>
+                            </Link>
+                        </Button>
                     </div>
                 </div>
             </section>
