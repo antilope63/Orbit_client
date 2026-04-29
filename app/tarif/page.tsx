@@ -87,16 +87,20 @@ export default function TarifsPage() {
                 </p>
               </div>
 
-              <div className="flex flex-col md:items-end shrink-0">
-                <p className="text-sm md:text-base text-neutral-600 mb-2">À partir de</p>
-                <p className="text-3xl md:text-4xl lg:text-5xl font-black leading-none">
+               <div className="md:text-right">
+              <div className="inline-block text-left">
+                <p className="text-sm text-neutral-600 md:text-base">
+                  À partir de
+                </p>
+                <p className="mt-1 text-4xl font-bold text-black md:text-5xl">
                   1 000€
-                  <span className="text-sm md:text-base font-medium text-neutral-600">
-                    /mois/magasin
+                  <span className="text-base font-medium text-neutral-700 md:text-lg">
+                    /mois/magasins
                   </span>
                 </p>
               </div>
             </div>
+          </div>
 
             {/* Features cards */}
             <div className="relative grid md:grid-cols-3 gap-4 md:gap-5 mt-8 lg:mt-10">
@@ -190,6 +194,21 @@ export default function TarifsPage() {
               );
             })}
           </div>
+        </div>
+      </section>
+
+      {/* ========== CTA BESOINS SPÉCIFIQUES ========== */}
+      <section className="px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight">
+            Vous avez besoin des besoin specific
+          </h2>
+          <button
+            type="button"
+            className="mt-8 bg-[#8B1A1A] hover:bg-[#6f1414] active:scale-[0.98] transition-all text-white font-medium px-8 py-3.5 rounded-[10px] shadow-sm"
+          >
+            Demander une demo
+          </button>
         </div>
       </section>
     </main>
