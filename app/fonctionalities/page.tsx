@@ -27,19 +27,19 @@ const principalesCards = [
 
 const avanceesCards = [
     {
-        title: "Historique des achats",
-        description: "Consultez l'ensemble de vos achats passés directement depuis l'application, avec le détail de chaque article.",
-        img: "/image/scan_home.png",
+        title: "Tarification flexible",
+        description: "Choisissez la formule qui correspond à vos besoins. Nos offres s'adaptent à la taille de votre magasin et à votre volume de ventes.",
+        img: "/image/price.jpg",
     },
     {
         title: "Notifications en temps réel",
         description: "Recevez des alertes personnalisées sur vos achats, promotions et nouveautés disponibles en magasin.",
-        img: "/image/achat_home.png",
+        img: "/image/notification.jpg",
     },
     {
-        title: "Mode hors-ligne",
-        description: "Continuez à scanner vos articles même sans connexion internet. La synchronisation se fait automatiquement.",
-        img: "/image/partir_home.png",
+        title: "Maintenance et installation",
+        description: "L'installation et la maintenance sont entièrement organisées par nos soins. Vous n'avez rien à gérer, nous nous occupons de tout.",
+        img: "/image/installation.jpg",
     },
 ];
 
@@ -107,7 +107,7 @@ export default function FonctionnalitesPage() {
                                     : "text-[#8C1111] hover:bg-gray-100"
                             )}
                         >
-                            principales
+                            Principales
                         </button>
                         <button
                             onClick={() => setActiveTab("avancees")}
@@ -118,7 +118,7 @@ export default function FonctionnalitesPage() {
                                     : "text-[#8C1111] hover:bg-gray-100"
                             )}
                         >
-                            avancées
+                            Avancées
                         </button>
                     </div>
                 </div>
@@ -129,16 +129,16 @@ export default function FonctionnalitesPage() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                     {cards.map((card, i) => (
                         <Card key={i} className="overflow-hidden rounded-2xl shadow-sm border-0">
-                            <div className="w-full h-[180px] relative">
+                            <div className="w-full h-[250px] relative">
                                 <Image
                                     src={card.img}
                                     alt={card.title}
                                     fill
-                                    className="object-cover"
+                                    className="object-contain"
                                 />
                             </div>
                             <CardContent className="p-5 flex flex-col gap-2">
-                                <h3 className="font-bold text-black text-[18px]">{card.title}</h3>
+                                <h3 className="font-bold text-black text-[20px]">{card.title}</h3>
                                 <p className="text-[#6A6A73] text-[16px] leading-relaxed">{card.description}</p>
                             </CardContent>
                         </Card>
