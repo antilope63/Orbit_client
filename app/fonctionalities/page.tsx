@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const principalesCards = [
     {
@@ -45,6 +46,13 @@ const avanceesCards = [
 
 export default function FonctionnalitesPage() {
     const [activeTab, setActiveTab] = useState<"principales" | "avancees">("principales");
+    const [direction, setDirection] = useState(1);
+
+    const handleTabChange = (tab: "principales" | "avancees") => {
+        setDirection(tab === "avancees" ? 1 : -1);
+        setActiveTab(tab);
+    };
+
     const cards = activeTab === "principales" ? principalesCards : avanceesCards;
 
     return (
@@ -95,55 +103,75 @@ export default function FonctionnalitesPage() {
                     l'expérience de votre magasin grâce à nos atouts.
                 </p>
 
-                {/* Tabs */}
+                {/* Tabs — fond rouge animé avec layoutId */}
                 <div className="flex items-center justify-center mt-8">
                     <div className="flex items-center bg-white rounded-xl p-1 gap-1 shadow-sm">
                         <button
-                            onClick={() => setActiveTab("principales")}
+                            onClick={() => handleTabChange("principales")}
                             className={cn(
-                                "px-8 py-3 rounded-lg font-semibold text-[16px] transition-all",
-                                activeTab === "principales"
-                                    ? "bg-[#8C1111] text-white"
-                                    : "text-[#8C1111] hover:bg-gray-100"
+                                "relative px-8 py-3 rounded-lg font-semibold text-[16px] transition-colors",
+                                activeTab === "principales" ? "text-white" : "text-[#8C1111] hover:bg-gray-100"
                             )}
                         >
-                            Principales
+                            {activeTab === "principales" && (
+                                <motion.div
+                                    layoutId="activeTab"
+                                    className="absolute inset-0 bg-[#8C1111] rounded-lg"
+                                    transition={{ duration: 0.35, ease: "easeInOut" }}
+                                />
+                            )}
+                            <span className="relative z-10">Principales</span>
                         </button>
                         <button
-                            onClick={() => setActiveTab("avancees")}
+                            onClick={() => handleTabChange("avancees")}
                             className={cn(
-                                "px-8 py-3 rounded-lg font-semibold text-[16px] transition-all",
-                                activeTab === "avancees"
-                                    ? "bg-[#8C1111] text-white"
-                                    : "text-[#8C1111] hover:bg-gray-100"
+                                "relative px-8 py-3 rounded-lg font-semibold text-[16px] transition-colors",
+                                activeTab === "avancees" ? "text-white" : "text-[#8C1111] hover:bg-gray-100"
                             )}
                         >
-                            Avancées
+                            {activeTab === "avancees" && (
+                                <motion.div
+                                    layoutId="activeTab"
+                                    className="absolute inset-0 bg-[#8C1111] rounded-lg"
+                                    transition={{ duration: 0.35, ease: "easeInOut" }}
+                                />
+                            )}
+                            <span className="relative z-10">Avancées</span>
                         </button>
                     </div>
                 </div>
             </section>
 
-            {/* Cards fonctionnalités */}
-            <section className="py-6 px-6">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    {cards.map((card, i) => (
-                        <Card key={i} className="overflow-hidden rounded-2xl shadow-sm border-0">
-                            <div className="w-full h-[250px] relative">
-                                <Image
-                                    src={card.img}
-                                    alt={card.title}
-                                    fill
-                                    className="object-contain"
-                                />
-                            </div>
-                            <CardContent className="p-5 flex flex-col gap-2">
-                                <h3 className="font-bold text-black text-[20px]">{card.title}</h3>
-                                <p className="text-[#6A6A73] text-[16px] leading-relaxed">{card.description}</p>
-                            </CardContent>
-                        </Card>
-                    ))}
-                </div>
+            {/* Cards — animation slide */}
+            <section className="py-6 px-6 overflow-hidden">
+                <AnimatePresence mode="wait" custom={direction}>
+                    <motion.div
+                        key={activeTab}
+                        custom={direction}
+                        initial={{ x: direction * 100, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        exit={{ x: direction * -100, opacity: 0 }}
+                        transition={{ duration: 0.35, ease: "easeInOut" }}
+                        className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto"
+                    >
+                        {cards.map((card, i) => (
+                            <Card key={i} className="overflow-hidden rounded-2xl shadow-sm border-0">
+                                <div className="w-full h-[250px] relative">
+                                    <Image
+                                        src={card.img}
+                                        alt={card.title}
+                                        fill
+                                        className="object-contain"
+                                    />
+                                </div>
+                                <CardContent className="p-5 flex flex-col gap-2">
+                                    <h3 className="font-bold text-black text-[20px]">{card.title}</h3>
+                                    <p className="text-[#6A6A73] text-[16px] leading-relaxed">{card.description}</p>
+                                </CardContent>
+                            </Card>
+                        ))}
+                    </motion.div>
+                </AnimatePresence>
             </section>
 
             {/* CTA Banner */}
