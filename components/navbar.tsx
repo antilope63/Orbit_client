@@ -56,13 +56,7 @@ export default function Navbar() {
         [firstName, lastName].filter(Boolean).join(" ") ||
         user?.email ||
         "Compte Orbit";
-
-    const navItems = isAuthenticated
-        ? [
-            { href: "/historique", label: "Historique" },
-            { href: "/contact", label: "Contact" },
-        ]
-        : [{ href: "/contact", label: "Contact" }];
+    const navTextClass = "text-[18px] font-medium transition-colors";
 
     const handleLogout = async () => {
         if (isLoggingOut) return;
@@ -81,27 +75,31 @@ export default function Navbar() {
     };
 
     return (
-        <header className="fixed w-full bg-[#fafafc] border-b border-gray-200 z-50">
-            <div className="grid w-full grid-cols-[1fr_auto_1fr] items-center gap-6 px-6 py-4">
+        <header className="fixed z-50 h-[72px] w-full border-b border-gray-200 bg-[#fafafc]">
+            <div className="grid h-full w-full grid-cols-[1fr_auto_1fr] items-center gap-6 px-6">
                 <nav className="flex items-center gap-6 text-[18px]">
-                    {navItems.map((item) => {
-                        const isActive = pathname === item.href;
-
-                        return (
-                            <Link
-                                key={item.href}
-                                href={item.href}
-                                className={[
-                                    "border-b-2 pb-1 text-[18px] transition-colors",
-                                    isActive
-                                        ? "border-[#8C1111] text-black"
-                                        : "border-transparent text-[#6A6A73] hover:text-black",
-                                ].join(" ")}
-                            >
-                                {item.label}
-                            </Link>
-                        );
-                    })}
+                    <Link
+                        href="/fonctionalities"
+                        className={[
+                            navTextClass,
+                            pathname === "/fonctionalities"
+                                ? "text-black"
+                                : "text-[#6A6A73] hover:text-black",
+                        ].join(" ")}
+                    >
+                        Fonctionnalités
+                    </Link>
+                    <Link
+                        href="/tarifs"
+                        className={[
+                            navTextClass,
+                            pathname === "/tarifs"
+                                ? "text-black"
+                                : "text-[#6A6A73] hover:text-black",
+                        ].join(" ")}
+                    >
+                        Tarifs
+                    </Link>
                 </nav>
 
                 <div className="flex justify-center">
@@ -116,7 +114,18 @@ export default function Navbar() {
                     </Link>
                 </div>
 
-                <div className="flex items-center justify-end gap-3">
+                <div className="flex h-10 items-center justify-end gap-6">
+                    <Link
+                        href="/contact"
+                        className={[
+                            navTextClass,
+                            pathname === "/contact"
+                                ? "text-black"
+                                : "text-[#6A6A73] hover:text-black",
+                        ].join(" ")}
+                    >
+                        Contact
+                    </Link>
                     {isAuthenticated ? (
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
@@ -162,17 +171,10 @@ export default function Navbar() {
                         <>
                             <Link
                                 href="/connexion"
-                                className="text-[16px] font-medium text-[#6A6A73] transition-colors hover:text-black"
+                                className={`${navTextClass} text-[#6A6A73] hover:text-black`}
                             >
-                                Connexion
+                                Se connecter
                             </Link>
-
-                            <Button
-                                asChild
-                                className="h-10 rounded-md bg-[#8C1111] px-5 text-white hover:bg-[#5e0a0a]"
-                            >
-                                <Link href="/inscription">Inscription</Link>
-                            </Button>
                         </>
                     )}
                 </div>
