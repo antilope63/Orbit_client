@@ -3,27 +3,68 @@
 import { useState, type FormEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { persistAuthSession } from "@/lib/authSession";
+import { orbitApiPath } from "@/lib/orbitApi";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleLogin = (event: FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setError(null);
 
-    if (!email.trim() || !password) {
+    const normalizedEmail = email.trim();
+    if (!normalizedEmail || !password) {
       setError("Email et mot de passe sont requis.");
       return;
     }
 
-    setError("La connexion client n'est pas encore branchée.");
+    setLoading(true);
+
+    try {
+      const response = await fetch(orbitApiPath("/api/auth/login"), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
+        body: JSON.stringify({ email: normalizedEmail, password }),
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        setError(data?.description || data?.error || "Échec de la connexion.");
+        return;
+      }
+
+      if (!data?.access_token || !data?.refresh_token) {
+        setError("La session retournée par l'API est invalide.");
+        return;
+      }
+
+      persistAuthSession({
+        accessToken: data.access_token,
+        refreshToken: data.refresh_token,
+        user: data.user,
+      });
+
+      router.replace("/");
+      router.refresh();
+    } catch {
+      setError("Erreur de connexion à l'API.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -91,8 +132,9 @@ export default function LoginPage() {
             <Button
               type="submit"
               className="mt-2 w-full rounded-md bg-[#8C1711] py-5 text-base font-medium text-white hover:bg-[#5e0a0a]"
+              disabled={loading}
             >
-              Se connecter
+              {loading ? "Connexion..." : "Se connecter"}
             </Button>
 
             <p className="mt-6 text-center text-sm text-gray-600">

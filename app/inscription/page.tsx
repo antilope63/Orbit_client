@@ -3,16 +3,21 @@
 import { useState, type FormEvent, type ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { persistAuthSession } from "@/lib/authSession";
+import { orbitApiPath } from "@/lib/orbitApi";
 
 type Step = "infos" | "password" | "verify";
 
 export default function SignupPage() {
+  const router = useRouter();
   const [step, setStep] = useState<Step>("infos");
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const [email, setEmail] = useState("");
@@ -35,7 +40,7 @@ export default function SignupPage() {
     setStep("password");
   };
 
-  const handleSignup = (event: FormEvent<HTMLFormElement>) => {
+  const handleSignup = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!password || !confirmPassword) {
@@ -48,8 +53,75 @@ export default function SignupPage() {
       return;
     }
 
+    setLoading(true);
     setError(null);
-    setStep("verify");
+
+    try {
+      const response = await fetch(orbitApiPath("/api/auth/signup"), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
+        body: JSON.stringify({
+          email: email.trim(),
+          password,
+          profile: {
+            first_name: firstName.trim(),
+            last_name: lastName.trim(),
+            birth_date: birthDate,
+          },
+        }),
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (
+        data?.status === "exists" &&
+        data?.reason === "existing_user_confirmed"
+      ) {
+        setError("Ce compte existe déjà. Connectez-vous.");
+        return;
+      }
+
+      if (
+        data?.status === "pending" &&
+        data?.reason === "existing_user_unconfirmed"
+      ) {
+        setStep("verify");
+        return;
+      }
+
+      if (!response.ok) {
+        setError(data?.description || "Erreur lors de l'inscription.");
+        return;
+      }
+
+      if (
+        data?.status === "confirmed" &&
+        data?.session?.access_token &&
+        data?.session?.refresh_token
+      ) {
+        persistAuthSession({
+          accessToken: data.session.access_token,
+          refreshToken: data.session.refresh_token,
+          user: data.user,
+        });
+
+        router.replace("/");
+        router.refresh();
+        return;
+      }
+
+      if (data?.status === "confirmed") {
+        setError("La session retournée par l'API est invalide.");
+        return;
+      }
+
+      setStep("verify");
+    } catch {
+      setError("Erreur de connexion à l'API.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -164,9 +236,10 @@ export default function SignupPage() {
 
                 <Button
                   type="submit"
+                  disabled={loading}
                   className="w-full bg-[#8C1711] py-5 text-white hover:bg-[#5e0a0a]"
                 >
-                  Créer le compte
+                  {loading ? "Création..." : "Créer le compte"}
                 </Button>
 
                 <AuthLink />
