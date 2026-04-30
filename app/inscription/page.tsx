@@ -125,7 +125,7 @@ export default function SignupPage() {
   };
 
   return (
-    <main className="grid flex-1 grid-cols-1 md:grid-cols-[1.1fr_1fr]">
+    <main className="grid min-h-0 flex-1 grid-cols-1 overflow-hidden md:grid-cols-[1.1fr_1fr]">
       <div className="relative hidden md:block">
         <Image
           src="/images/store.jpg"
@@ -136,7 +136,7 @@ export default function SignupPage() {
         />
       </div>
 
-      <div className="flex flex-col items-center justify-center bg-[#F5F5F7] py-16">
+      <div className="flex min-h-0 flex-col items-center justify-center overflow-y-auto bg-[#F5F5F7] py-8">
         <section className="w-full max-w-md px-10">
           {step === "infos" && (
             <>
