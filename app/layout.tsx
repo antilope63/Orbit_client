@@ -15,11 +15,11 @@ export default function RootLayout({
 }) {
     return (
         <html lang="fr">
-            <body className="bg-[#fafafc]">
+            <body className="min-h-screen bg-[#fafafc] flex flex-col">
                 <Navbar />
-                <main className="pt-[55px]">
+                <div className="flex min-h-0 flex-1 flex-col pt-[72px]">
                     {children}
-                </main>
+                </div>
                 <Footer />
             </body>
         </html>
