@@ -1,4 +1,4 @@
-type AuthUser = {
+export type AuthUser = {
   email?: string;
   user_metadata?: {
     first_name?: string;
@@ -6,6 +6,39 @@ type AuthUser = {
     avatar_url?: string;
   };
 };
+
+export type AuthSession = {
+  accessToken: string;
+  refreshToken: string | null;
+  user: AuthUser | null;
+};
+
+export const AUTH_SESSION_EVENT = "orbit-auth-session-change";
+
+function notifyAuthSessionChange() {
+  window.dispatchEvent(new Event(AUTH_SESSION_EVENT));
+}
+
+export function getStoredAuthSession(): AuthSession | null {
+  const accessToken = localStorage.getItem("sb-access-token");
+  const refreshToken = localStorage.getItem("sb-refresh-token");
+  const storedUser = localStorage.getItem("sb-user");
+
+  if (!accessToken) {
+    return null;
+  }
+
+  let user: AuthUser | null = null;
+  if (storedUser) {
+    try {
+      user = JSON.parse(storedUser) as AuthUser;
+    } catch {
+      user = null;
+    }
+  }
+
+  return { accessToken, refreshToken, user };
+}
 
 export function persistAuthSession({
   accessToken,
@@ -24,4 +57,13 @@ export function persistAuthSession({
   } else {
     localStorage.removeItem("sb-user");
   }
+
+  notifyAuthSessionChange();
+}
+
+export function clearAuthSession() {
+  localStorage.removeItem("sb-access-token");
+  localStorage.removeItem("sb-refresh-token");
+  localStorage.removeItem("sb-user");
+  notifyAuthSessionChange();
 }
