@@ -1,12 +1,13 @@
 "use client";
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { LogOut } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -42,23 +43,26 @@ export default function Navbar() {
         };
     }, []);
 
-    const navLinkClass = (href: string) =>
-        [
-            "text-[16px] font-medium transition-colors",
-            pathname === href ? "text-black" : "text-[#6A6A73] hover:text-black",
-        ].join(" ");
-
     const user = authSession?.user;
+    const isAuthenticated = !!authSession;
     const firstName = user?.user_metadata?.first_name?.trim() ?? "";
     const lastName = user?.user_metadata?.last_name?.trim() ?? "";
     const initials =
         `${firstName.charAt(0)}${lastName.charAt(0)}`.trim().toUpperCase() ||
         user?.email?.charAt(0)?.toUpperCase() ||
         "OR";
+    const avatarUrl = user?.user_metadata?.avatar_url;
     const displayName =
         [firstName, lastName].filter(Boolean).join(" ") ||
         user?.email ||
         "Compte Orbit";
+
+    const navItems = isAuthenticated
+        ? [
+            { href: "/historique", label: "Historique" },
+            { href: "/contact", label: "Contact" },
+        ]
+        : [{ href: "/contact", label: "Contact" }];
 
     const handleLogout = async () => {
         if (isLoggingOut) return;
@@ -78,25 +82,28 @@ export default function Navbar() {
 
     return (
         <header className="fixed w-full bg-[#fafafc] border-b border-gray-200 z-50">
-            <div className="w-full relative flex items-center justify-between px-6 py-4">
-
-                {/* Liens — gauche */}
+            <div className="grid w-full grid-cols-[1fr_auto_1fr] items-center gap-6 px-6 py-4">
                 <nav className="flex items-center gap-6 text-[18px]">
-                    <Link
-                        href="/fonctionalities"
-                        className={navLinkClass("/fonctionalities")}
-                    >
-                        Fonctionnalités
-                    </Link>
-                    <Link
-                        href="/tarifs"
-                        className={navLinkClass("/tarifs")}
-                    >
-                        Tarifs
-                    </Link>
+                    {navItems.map((item) => {
+                        const isActive = pathname === item.href;
+
+                        return (
+                            <Link
+                                key={item.href}
+                                href={item.href}
+                                className={[
+                                    "border-b-2 pb-1 text-[18px] transition-colors",
+                                    isActive
+                                        ? "border-[#8C1111] text-black"
+                                        : "border-transparent text-[#6A6A73] hover:text-black",
+                                ].join(" ")}
+                            >
+                                {item.label}
+                            </Link>
+                        );
+                    })}
                 </nav>
 
-                {/* Logo — centré */}
                 <div className="flex justify-center">
                     <Link href="/" className="hover:text-black transition-colors">
                         <Image
@@ -109,23 +116,21 @@ export default function Navbar() {
                     </Link>
                 </div>
 
-                {/* Actions — droite */}
-                <div className="flex items-center gap-6">
-                    <Link
-                        href="/contact"
-                        className={navLinkClass("/contact")}
-                    >
-                        Contact
-                    </Link>
-                    {authSession ? (
+                <div className="flex items-center justify-end gap-3">
+                    {isAuthenticated ? (
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                                 <button
                                     type="button"
-                                    className="flex size-10 items-center justify-center rounded-full border border-gray-200 bg-[#8C1111] text-sm font-semibold text-white transition-transform hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8C1111]/30"
+                                    className="transition-transform hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8C1111]/30"
                                     aria-label="Ouvrir le menu du compte"
                                 >
-                                    {initials}
+                                    <Avatar className="size-10 border border-gray-200">
+                                        <AvatarImage src={avatarUrl} />
+                                        <AvatarFallback className="bg-[#8C1111] text-white text-sm font-semibold">
+                                            {initials}
+                                        </AvatarFallback>
+                                    </Avatar>
                                 </button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end" className="w-56">
@@ -154,12 +159,21 @@ export default function Navbar() {
                             </DropdownMenuContent>
                         </DropdownMenu>
                     ) : (
-                        <Link
-                            href="/connexion"
-                            className={navLinkClass("/connexion")}
-                        >
-                            Se connecter
-                        </Link>
+                        <>
+                            <Link
+                                href="/connexion"
+                                className="text-[16px] font-medium text-[#6A6A73] transition-colors hover:text-black"
+                            >
+                                Connexion
+                            </Link>
+
+                            <Button
+                                asChild
+                                className="h-10 rounded-md bg-[#8C1111] px-5 text-white hover:bg-[#5e0a0a]"
+                            >
+                                <Link href="/inscription">Inscription</Link>
+                            </Button>
+                        </>
                     )}
                 </div>
 
