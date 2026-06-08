@@ -70,7 +70,7 @@ export default function TarifsPage() {
               src="/logo_rouge.svg"
               alt=""
               aria-hidden="true"
-              className="pointer-events-none select-none absolute -bottom-2 -right-4 sm:-bottom-4 sm:-right-6 w-[200px] sm:w-[320px] lg:w-[420px] opacity-[0.06]"
+              className="pointer-events-none select-none absolute -bottom-2 -right-4 sm:-bottom-0 sm:-right-0 w-[200px] sm:w-[300px] lg:w-[400px] opacity-[0.06]"
             />
 
             {/* Top: titre + prix */}
