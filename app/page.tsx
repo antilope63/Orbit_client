@@ -1,103 +1,135 @@
-import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import StepCard from "@/components/homecard";
+import StatCard from "@/components/homestat";
+import { cn } from "@/lib/utils";
+import React from "react";
+import Link from "next/link";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      <div className="min-h-screen w-full bg-[#F2F2F6] text-black pt-[55px]">
+
+        <div className="relative w-full h-[10rem]">
+          <div
+            className={cn(
+              "absolute inset-0 z-0",
+              "[background-size:30px_30px]",
+              "[background-image:linear-gradient(to_right,#E7E7E8_1px,transparent_1px),linear-gradient(to_bottom,#E7E7E8_1px,transparent_1px)]",
+              "dark:[background-image:linear-gradient(to_right,#262626_1px,transparent_3px),linear-gradient(to_bottom,#262626_1px,transparent_3px)]"
+            )}
+          />
+          <div className="absolute inset-0 z-10 bg-gradient-to-b from-[#F2F2F6]/0 via-[#F2F2F6]/70 to-[#F2F2F6]" />
+          <div className="relative z-10 flex flex-col items-center w-full py-7">
+            <h1 className="text-[72px] font-semibold text-center mb-4">
+              Le shopping sans files d’attente
+            </h1>
+
+            <p className="text-center text-[#6A6A73] max-w-2xl mb-6 font-medium text-[28px]">
+              <span className="text-[#984B4B]">Orbit </span>
+              réinvente l’expérience en magasin. Scannez, payez et partez. C’est aussi simple que ça.
+            </p>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+        <div className="relative z-10 flex flex-col items-center w-full py-25">
+          <Link href="/inscription">
+            <Button className="flex bg-[#8C1111] hover:bg-[#5e0a0a] text-[20px] text-white font-semibold rounded-md py-6">
+              Découvrir Orbit
+            </Button>
+          </Link>
+
+          <div className="mt-8 rounded-2xl shadow-md overflow-hidden max-w-4xl w-full bg-white">
+            <img
+              src="/images/accueil.png"
+              alt="Image accueil"
+              className="w-full h-auto object-cover"
+            />
+          </div>
+        </div>
+
+        <section className="py-16 px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-[40px] font-bold mb-2">
+              Comment ça marche ?
+            </h2>
+
+            <p className="text-[#0D0D0D] font-semibold text-[20px]">
+              <span className="text-[#a12020]">Orbit </span>
+              simplifie le shopping en trois étapes.
+            </p>
+          </div>
+
+          <div className="flex flex-col md:flex-row justify-center items-start gap-12 max-w-6xl mx-auto">
+            <StepCard
+              image="/images/scan_home.png"
+              alt="Vous scannez"
+              title="Vous Scannez"
+              description="Avec votre téléphone, vous pouvez ajouter au panier vos articles."
+            />
+
+            <StepCard
+              image="/images/partir_home.png"
+              alt="Partez sans attente"
+              title="Partez sans attente"
+              description="Vous payez en toute sécurité via l’application lors de votre sortie."
+            />
+
+            <StepCard
+              image="/images/achat_home.png"
+              alt="Profitez de vos achats"
+              title="Profitez de vos achats !"
+              description="Sortez avec vos nouveaux vêtements, sans jamais avoir fait la queue."
+            />
+          </div>
+        </section>
+
+        <section className="py-16 px-6">
+          <div className="max-w-6xl mx-auto flex flex-col items-center gap-16">
+            <div className="w-full bg-white rounded-2xl shadow-sm py-10 px-6 flex flex-col md:flex-row justify-around items-center text-center">
+              <StatCard
+                value={90}
+                title="Paniers abandonnés"
+                description="Par les clients des grandes enseignes à cause de l’attente."
+                isPercentage
+              />
+
+              <StatCard
+                value={45}
+                title="Intéressés"
+                description="Par Orbit, d'après une enquête sur un pannel de 100 personnes"
+                isPercentage
+              />
+
+              <StatCard
+                value={75}
+                title="Efficacité en caisse"
+                description="Réduction des files et amélioration du flux en magasin."
+                isPercentage
+              />
+            </div>
+
+            <div className="text-center">
+              <h2 className="text-[40px] font-bold mb-2">
+                Et si vous n’attendiez plus ?
+              </h2>
+
+              <p className="text-[#6A6A73] mb-6 font-medium text-[24px]">
+                Avec <span className="text-[#984B4B]">Orbit</span>
+                , vous n’attendez plus.
+                <br />
+                Vous profitez, vous sortez léger.
+              </p>
+              <Link href="/inscription">
+                <Button className="bg-[#8C1111] hover:bg-[#5e0a0a] text-[20px] font-semibold text-white rounded-md px-6 py-6">
+                  Essayer Orbit
+                </Button>
+              </Link>  
+            </div>
+          </div>
+        </section>
+      </div>
+    </>
   );
 }
