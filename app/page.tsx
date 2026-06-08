@@ -42,7 +42,7 @@ export default function HomePage() {
 
           <div className="mt-8 rounded-2xl shadow-md overflow-hidden max-w-4xl w-full bg-white">
             <img
-              src="/images/accueil.png"
+              src="/image/accueil.png"
               alt="Image accueil"
               className="w-full h-auto object-cover"
             />
@@ -63,21 +63,21 @@ export default function HomePage() {
 
           <div className="flex flex-col md:flex-row justify-center items-start gap-12 max-w-6xl mx-auto">
             <StepCard
-              image="/images/scan_home.png"
+              image="/image/scan_home.png"
               alt="Vous scannez"
               title="Vous Scannez"
               description="Avec votre téléphone, vous pouvez ajouter au panier vos articles."
             />
 
             <StepCard
-              image="/images/partir_home.png"
+              image="/image/partir_home.png"
               alt="Partez sans attente"
               title="Partez sans attente"
               description="Vous payez en toute sécurité via l’application lors de votre sortie."
             />
 
             <StepCard
-              image="/images/achat_home.png"
+              image="/image/achat_home.png"
               alt="Profitez de vos achats"
               title="Profitez de vos achats !"
               description="Sortez avec vos nouveaux vêtements, sans jamais avoir fait la queue."
