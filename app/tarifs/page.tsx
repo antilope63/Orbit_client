@@ -1,6 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const features = [
   {
@@ -44,8 +49,6 @@ const faqs = [
 ];
 
 export default function TarifsPage() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
-
   return (
     <main className="min-h-screen bg-white text-black">
       {/* ========== PRICING ========== */}
@@ -87,20 +90,20 @@ export default function TarifsPage() {
                 </p>
               </div>
 
-               <div className="md:text-right">
-              <div className="inline-block text-left">
-                <p className="text-sm text-neutral-600 md:text-base">
-                  À partir de
-                </p>
-                <p className="mt-1 text-4xl font-bold text-black md:text-5xl">
-                  1 000€
-                  <span className="text-base font-medium text-neutral-700 md:text-lg">
-                    /mois/magasins
-                  </span>
-                </p>
+              <div className="md:text-right">
+                <div className="inline-block text-left">
+                  <p className="text-sm text-neutral-600 md:text-base">
+                    À partir de
+                  </p>
+                  <p className="mt-1 text-4xl font-bold text-black md:text-5xl">
+                    1 000€
+                    <span className="text-base font-medium text-neutral-700 md:text-lg">
+                      /mois/magasins
+                    </span>
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
 
             {/* Features cards */}
             <div className="relative grid md:grid-cols-3 gap-4 md:gap-5 mt-8 lg:mt-10">
@@ -135,72 +138,35 @@ export default function TarifsPage() {
       </section>
 
       {/* ========== FAQ ========== */}
-      <section className="px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+      <section className="px-4 sm:px-6 lg:px-8 pt-20 lg:pt-28 pb-10 lg:pb-12">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-center mb-12 lg:mb-16 leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-center mb-12 lg:mb-16 leading-tight">
             Questions Fréquemment Posées
           </h2>
 
-          <div className="space-y-4">
-            {faqs.map((faq, i) => {
-              const isOpen = openIndex === i;
-              return (
-                <div
-                  key={i}
-                  className="bg-[#F2F2F6] rounded-2xl overflow-hidden"
-                >
-                  <button
-                    type="button"
-                    onClick={() => setOpenIndex(isOpen ? null : i)}
-                    aria-expanded={isOpen}
-                    className="w-full flex items-center justify-between gap-4 px-6 md:px-8 py-5 text-left"
-                  >
-                    <span className="font-bold text-base md:text-lg">
-                      {faq.question}
-                    </span>
-                    <svg
-                      className={`w-5 h-5 flex-shrink-0 transition-transform duration-300 ${
-                        isOpen ? 'rotate-180' : ''
-                      }`}
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2.5}
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  </button>
-
-                  {/* Animated reveal */}
-                  <div
-                    className={`grid transition-all duration-300 ease-in-out ${
-                      isOpen
-                        ? 'grid-rows-[1fr] opacity-100'
-                        : 'grid-rows-[0fr] opacity-0'
-                    }`}
-                  >
-                    <div className="overflow-hidden">
-                      <p className="px-6 md:px-8 pb-6 text-neutral-700 leading-relaxed">
-                        {faq.answer}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+          <Accordion type="single" collapsible defaultValue="item-0" className="w-full">
+            {faqs.map((faq, i) => (
+              <AccordionItem
+                key={i}
+                value={`item-${i}`}
+                className="border-b border-neutral-200"
+              >
+                <AccordionTrigger className="font-semibold text-lg md:text-xl py-5 hover:no-underline text-left">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-neutral-600 text-sm md:text-base leading-relaxed pb-5">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </section>
 
       {/* ========== CTA BESOINS SPÉCIFIQUES ========== */}
-      <section className="px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+      <section className="px-4 sm:px-6 lg:px-8 pt-10 lg:pt-12 pb-16 lg:pb-24">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight leading-tight">
             Vous avez besoin des besoin specific
           </h2>
           <button
@@ -215,16 +181,9 @@ export default function TarifsPage() {
   );
 }
 
-/* ---------- petit composant icône ---------- */
 function Sparkle() {
   return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-    >
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M12 0l2.5 9.5L24 12l-9.5 2.5L12 24l-2.5-9.5L0 12l9.5-2.5L12 0z" />
     </svg>
   );
