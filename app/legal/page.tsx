@@ -22,7 +22,7 @@ function LegalPageContent() {
   }, [searchParams])
 
   return (
-    <main className="bg-[#f5f5f8] min-h-screen flex justify-center items-start pt-24 pb-16 px-4">
+    <main className="bg-[#f5f5f8] min-h-screen flex justify-center items-start pt-18 pb-16 px-4">
       <div className="bg-white rounded-2xl shadow-sm w-full max-w-3xl p-10">
 
         <div className="flex gap-1 bg-[#f5f5f8] rounded-xl p-1 mb-8">
@@ -32,7 +32,7 @@ function LegalPageContent() {
               onClick={() => setActiveTab(tab)}
               className={`flex-1 text-xs py-2 px-2 rounded-lg transition-all font-medium ${
                 activeTab === tab
-                  ? "bg-white text-black shadow-sm"
+                  ? "bg-white text-[#984B4B] shadow-sm"
                   : "text-gray-500 hover:text-gray-800"
               }`}
             >
