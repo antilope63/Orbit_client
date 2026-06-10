@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import {
   Accordion,
   AccordionContent,
@@ -169,12 +170,12 @@ export default function TarifsPage() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight leading-tight">
             Vous avez besoin des besoin specific
           </h2>
-          <button
-            type="button"
-            className="mt-8 bg-[#8B1A1A] hover:bg-[#6f1414] active:scale-[0.98] transition-all text-white font-medium px-8 py-3.5 rounded-[10px] shadow-sm"
+          <Link
+            href="/contact"
+            className="mt-8 inline-block bg-[#8B1A1A] hover:bg-[#6f1414] active:scale-[0.98] transition-all text-white font-medium px-8 py-3.5 rounded-[10px] shadow-sm"
           >
             Demander une demo
-          </button>
+          </Link>
         </div>
       </section>
     </main>
