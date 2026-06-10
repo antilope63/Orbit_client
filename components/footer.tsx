@@ -5,10 +5,10 @@ export default function Footer() {
             <div className="max-w-8xl mx-auto flex justify-between items-center px-6 text-sm font-regular text-[#525258]">
                 <p>© 2026 Orbit. Tous droits réservés.</p>
                 <div className="flex space-x-6">
-                    <a href="/CGUContent" className="hover:underline">
+                    <a href="/conditions" className="hover:underline">
                         Conditions d'utilisation
                     </a>
-                    <a href="/Privacy" className="hover:underline">
+                    <a href="/privacy" className="hover:underline">
                         Politique de confidentialité
                     </a>
                 </div>
