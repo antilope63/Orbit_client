@@ -76,7 +76,7 @@ export default function FonctionnalitesPage() {
                         </h1>
                         <p className="text-[#6A6A73] font-medium text-[18px]">
                             <span className="text-[#984B4B] font-semibold">Orbit </span>
-                            réinvente l'expérience en magasin. Scannez, payez et partez. C'est aussi simple que ça.
+                            réinvente l&apos;expérience en magasin. Scannez, payez et partez. C&apos;est aussi simple que ça.
                         </p>
                         <Button asChild className="w-fit text-[14px] bg-[#8C1111] hover:bg-[#5e0a0a] text-white font-semibold rounded-md px-6 py-2">
                             <Link href="/inscription">
@@ -100,7 +100,7 @@ export default function FonctionnalitesPage() {
                 <h2 className="text-[40px] font-bold mb-2">Services proposées</h2>
                 <p className="text-[#6A6A73] font-medium text-[18px] max-w-[500px] mx-auto">
                     Découvrez comment <span className="text-[#984B4B] font-semibold">Orbit</span> peut révolutionner
-                    l'expérience de votre magasin grâce à nos atouts.
+                    l&apos;expérience de votre magasin grâce à nos atouts.
                 </p>
 
                 {/* Tabs — fond rouge animé avec layoutId */}
@@ -179,11 +179,11 @@ export default function FonctionnalitesPage() {
             <section className="py-16 px-6">
                 <div className="max-w-6xl mx-auto flex flex-col items-center text-center gap-4">
                     <h2 className="text-[36px] font-bold text-[#1a1a1a]">
-                        Prêt à réinventer l'expérience en magasin ?
+                        Prêt à réinventer l&apos;expérience en magasin ?
                     </h2>
                     <p className="text-[#6A6A73] text-[18px] max-w-lg">
                         Avec <span className="text-[#984B4B] font-semibold">Orbit</span>, transformez votre boutique
-                        en supprimant l'attente à la caisse.
+                        en supprimant l&apos;attente à la caisse.
                     </p>
                     <Button asChild className="bg-[#8C1111] hover:bg-[#5e0a0a] text-white font-semibold text-[14px] rounded-md px-8 py-5 mt-2">
                         <Link href="/inscription">
