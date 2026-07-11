@@ -8,7 +8,7 @@ export default function Footer() {
                     <a href="/conditions" className="hover:underline">
                         Conditions d'utilisation
                     </a>
-                    <a href="/confidentialite" className="hover:underline">
+                    <a href="/privacy" className="hover:underline">
                         Politique de confidentialité
                     </a>
                 </div>
